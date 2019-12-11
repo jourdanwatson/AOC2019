@@ -66,40 +66,40 @@ int runProgram(){
         if(input.at(i)==99){
             //Stop program if 99 is found
             posZero=input.at(0);
-            return posZero;
+           break;
         }
         else{
+            //Input the values into the Opcode formula
             Opcode(input.at(i),input.at(i+1),input.at(i+2),input.at(i+3));
             i+=3;
         }
     }
-    cout<<"Position 0: "<<input.at(0)<<endl;
 
     return posZero;
 }
 
 int main() {
-    ReadInVector();
-    int value=0;
-    cout<<"Val: "<<value<<endl;
+
+
    for (int noun=0; noun < 100; noun++){
+
         for(int verb=0; verb < 100; verb++){
+            ReadInVector();
             input.at(1)=noun;
             input.at(2)=verb;
-            cout<<"Noun: "<<noun<<endl;
-            cout<<"Verb: "<<verb<<endl;
+
            // printVector(input);
-            value=runProgram();
-            cout<<"Val: "<<value<<endl;
+            int value=runProgram();
+
+
             if(value==19690720){
                 cout<<"Values found! "<<endl;
                 cout<<"Noun: "<<noun<<endl;
                 cout<<"Verb: "<<verb<<endl;
                 return 0;
             }
-            else{
-                break;
-            }
+          input.clear();
+
         }
 
     }
