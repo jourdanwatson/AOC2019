@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/jourdan.watson/CLionProjects/AOC2019-1/main.cpp
+iostream
+-
+fstream
+-
+string
+-
+cmath
+-
+
