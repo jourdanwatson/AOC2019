@@ -21,14 +21,14 @@ bool adjacentDigits(vector<int> current){
 
         int counter = std::count(current.begin(),current.end(), i);
         int value=i;
-        if(counter==2){
+        if(counter>=2){
             it = find(current.begin(),current.end(),value);
             it2 = find(it+1,current.end(),value);
             int pos1=distance(current.begin(),it);
             int pos2=distance(current.begin(),it2);
-
             int difference = pos1-pos2;
             if (abs(difference)==1){
+
                 return true;
             }
         }
@@ -53,19 +53,19 @@ int main() {
     int counter=0;
 //    string str="123789";
 //    current=makeVector(str);
+//    cout<<"Check decrease: "<<checkDecrease(current)<<endl;
+//    cout<<"adjacent? "<<adjacentDigits(current)<<endl;
+//    cout<<"check Nums: "<<checkNumDigits(current)<<endl;
 
 
     for(int i = 134792; i < 675811; i++ ){
         current=makeVector(to_string(i));
-        if(adjacentDigits(current)){
-            if(checkDecrease(current)){
-                if(checkNumDigits(current)){
-                    counter++;
-                }
-            }
+        if(adjacentDigits(current)&&checkDecrease(current)&&checkNumDigits(current)){
+          counter++;
         }
         current.clear();
     }
     cout<<"Counter: "<<counter<<endl;
+
     return 0;
 }
