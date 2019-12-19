@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include <vector>
 #include<algorithm>
 
@@ -14,18 +13,28 @@ vector<int> makeVector(const string& integer){
     }
     return current;
 }
-bool adjacentDigits(vector<int> current){
-    //Check to see if there are 2 digits that are equal and adjacent
-    vector<int>::iterator it,it2,it3;
-    it = adjacent_find(current.begin(),current.end());
-    it2=adjacent_find(it,current.end());
-    it3=adjacent_find(it2,current.end());
-    if(it!=current.end()){
-        if(count(current.begin(),current.end(),*it)==2 || count(current.begin(),current.end(),*it2)==2 || count(current.begin(),current.end(),*it3)==2){
+bool checkForDouble(vector<int> current){
+    //Check to see if there are 2 equal digits
+    for (int i =0; i<10;i++){
+        if(count(current.begin(),current.end(),i)==2){
             return true;
         }
     }
     return false;
+}
+bool adjacentDigits(vector<int> current){
+    //Check to see if there are 2 digits that are equal and adjacent
+    //Part 1 answer: 1955
+    vector<int>::iterator it,it2,it3;
+    it = adjacent_find(current.begin(),current.end());
+    if(it!=current.end()){
+        if(checkForDouble(current)){
+            return true;
+        }
+    }
+    return false;
+
+
 }
 bool checkDecrease(vector<int> current){
     //Check to see if the i+1 digit is lower than the previous
@@ -37,18 +46,13 @@ bool checkDecrease(vector<int> current){
     return true;
 }
 bool checkNumDigits(const vector<int>& current){
+    //Check to see if the number of digits is 6
     return current.size() == 6;
 }
 int main() {
 
     vector<int> current;
     int counter=0;
-//    string str="112333";
-//    current=makeVector(str);
-//    cout<<"Check decrease: "<<checkDecrease(current)<<endl;
-//    cout<<"adjacent? "<<adjacentDigits(current)<<endl;
-//    cout<<"check Nums: "<<checkNumDigits(current)<<endl;
-
 
     for(int i = 134792; i < 675811; i++ ){
         current=makeVector(to_string(i));
