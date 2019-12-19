@@ -2,6 +2,7 @@
 #include <string>
 #include <cstdlib>
 #include <vector>
+#include<algorithm>
 
 using namespace std;
 
@@ -15,22 +16,13 @@ vector<int> makeVector(const string& integer){
 }
 bool adjacentDigits(vector<int> current){
     //Check to see if there are 2 digits that are equal and adjacent
-    vector<int>::iterator it,it2;
-
-    for(auto i = 0; i < current.size(); i++){
-
-        int counter = std::count(current.begin(),current.end(), i);
-        int value=i;
-        if(counter>=2){
-            it = find(current.begin(),current.end(),value);
-            it2 = find(it+1,current.end(),value);
-            int pos1=distance(current.begin(),it);
-            int pos2=distance(current.begin(),it2);
-            int difference = pos1-pos2;
-            if (abs(difference)==1){
-
-                return true;
-            }
+    vector<int>::iterator it,it2,it3;
+    it = adjacent_find(current.begin(),current.end());
+    it2=adjacent_find(it,current.end());
+    it3=adjacent_find(it2,current.end());
+    if(it!=current.end()){
+        if(count(current.begin(),current.end(),*it)==2 || count(current.begin(),current.end(),*it2)==2 || count(current.begin(),current.end(),*it3)==2){
+            return true;
         }
     }
     return false;
@@ -51,7 +43,7 @@ int main() {
 
     vector<int> current;
     int counter=0;
-//    string str="123789";
+//    string str="112333";
 //    current=makeVector(str);
 //    cout<<"Check decrease: "<<checkDecrease(current)<<endl;
 //    cout<<"adjacent? "<<adjacentDigits(current)<<endl;
@@ -60,10 +52,12 @@ int main() {
 
     for(int i = 134792; i < 675811; i++ ){
         current=makeVector(to_string(i));
-        if(adjacentDigits(current)&&checkDecrease(current)&&checkNumDigits(current)){
-          counter++;
+        if(is_sorted(current.begin(),current.end())){
+            if(adjacentDigits(current) && checkDecrease(current) && checkNumDigits(current)){
+                counter++;
+                current.clear();
+            }
         }
-        current.clear();
     }
     cout<<"Counter: "<<counter<<endl;
 
